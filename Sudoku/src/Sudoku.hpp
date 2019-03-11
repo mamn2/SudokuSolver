@@ -12,16 +12,19 @@
 #include <stdio.h>
 #include <string>
 #include <array>
+#include <vector>
 #include <iostream>
 
 class SudokuPuzzle {
 public:
     std::string puzzle_s;
     std::array<std::array<int, 9>, 9> puzzle_a;
+    static std::vector<SudokuPuzzle> sudoku_games;
     
-    explicit SudokuPuzzle(std::string& setPuzzle);
+    explicit SudokuPuzzle();
     friend std::ostream& operator<<(std::ostream& outStream, const SudokuPuzzle& sudoku);
-    friend std::istream& operator>>(std::istream& inStream, const SudokuPuzzle& sudoku);
+    friend std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku);
+    void SetPuzzleS(const std::string setPuzzle_s);
 private:
     void inline SudokuStringToArray();
 };
