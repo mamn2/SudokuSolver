@@ -16,8 +16,38 @@ TEST_CASE("Output Stream") {
 
 TEST_CASE("Input Stream") {
     
-    SudokuPuzzle sudokuPuzzle;
-    std::cin >> sudokuPuzzle;
+    SECTION("Empty File") {
+        SudokuPuzzle sudokuPuzzle;
+        std::string fileName("/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/EmptyFile");
+        sudokuPuzzle.LoadPuzzles(fileName);
+        CHECK(sudoku_games.size() == 0);
+    }
+    
+    SECTION("One Game File") {
+        SudokuPuzzle sudokuPuzzle;
+        std::string fileName("/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/OneGame");
+        sudokuPuzzle.LoadPuzzles(fileName);
+        CHECK(GetSudokuGames().size() == 1);
+    }
+    
+    SECTION("Multiple games file") {
+        SudokuPuzzle sudokuPuzzle;
+        std::string fileName("/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/MultipleGames");
+        sudokuPuzzle.LoadPuzzles(fileName);
+        CHECK(GetSudokuGames().size() == 3);
+    }
+    
+    SECTION("Non-existent file") {
+        SudokuPuzzle sudokuPuzzle;
+        std::string fileName("Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/MultipleGames");
+        CHECK(sudokuPuzzle.LoadPuzzles(fileName) == false);
+    }
+    
+    SECTION("Random user input") {
+        SudokuPuzzle sudokuPuzzle;
+        std::string userInput("Game of thrones hypeee");
+        CHECK(sudokuPuzzle.LoadPuzzles(userInput) == false);
+    }
     
 }
 

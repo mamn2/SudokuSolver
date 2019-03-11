@@ -58,20 +58,24 @@ void SudokuPuzzle::SetPuzzleS(const std::string setPuzzle_s) {
     SudokuStringToArray();
 }
 
-//Initializing static class member
-std::vector<SudokuPuzzle> SudokuPuzzle::sudoku_games;
 
-std::istream& operator>>(std::istream& is, SudokuPuzzle& sudoku) {
+std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku) {
     
-    std::string line;
-    std::ifstream my_file;
     std::string filepath;
     std::cout << "Enter a filepath: " << std::endl;
     std::cin >> filepath;
+    sudoku.LoadPuzzles(filepath);
+    return inStream;
+}
+
+bool SudokuPuzzle::LoadPuzzles(std::string &filepath) const {
+    
+    std::string line;
+    std::ifstream my_file;
     my_file.open(filepath);
     
     //Clear the current list of games before appending new games
-    SudokuPuzzle::sudoku_games.clear();
+    sudoku_games.clear();
     
     //Iterate through the list and convert into SudokuPuzzle objects.
     if (my_file.is_open())
@@ -86,15 +90,49 @@ std::istream& operator>>(std::istream& is, SudokuPuzzle& sudoku) {
             }
             SudokuPuzzle current_sudoku;
             current_sudoku.SetPuzzleS(line);
-            SudokuPuzzle::sudoku_games.push_back(current_sudoku);
-            std::cout << SudokuPuzzle::sudoku_games.at(i);
+            sudoku_games.push_back(current_sudoku);
+            std::cout << sudoku_games.at(i);
             i++;
         }
         my_file.close();
-        
+        return true;
     } else {
         std::cout << "Unable to open file" << std::endl;
+        return false;
     }
     
-    return is;
 }
+
+std::vector<SudokuPuzzle>& GetSudokuGames() {
+    return sudoku_games;
+}
+
+
+/*
+//Backtracking algorithm used to solve puzzle recursively
+bool SudokuPuzzle::SolvePuzzle(std::array<std::array<int, 9>, 9> puzzle) {
+    
+    int currentRow = 0;
+    int currentColumn = 0;
+    
+    //If there is no empty locations, we have completed our board.
+    if (!FindEmptyTile(puzzle, currentRow, currentColumn)) {
+        return true;
+    } else {
+        for (int tileNum = 1; tileNum <= 9; tileNum++) {
+            if (PuzzleIsPossible(puzzle, currentRow, currentColumn, tileNum)) {
+                puzzle[currentRow][currentColumn] = tileNum;
+                
+                //recursively checks if making this assignment solves the puzzle
+                if (SolvePuzzle(puzzle)) {
+                    return true;
+                } else {
+                    //This is triggerred if it's not possible to solve the puzzle by making this assignment
+                    //Algorithm calculates this recursively
+                    puzzle[currentRow][currentColumn] = '_';
+                }
+            }
+        }
+    }
+    return false;
+}*/
