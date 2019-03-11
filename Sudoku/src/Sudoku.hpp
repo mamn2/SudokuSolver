@@ -25,6 +25,14 @@ public:
     friend std::ostream& operator<<(std::ostream& outStream, const SudokuPuzzle& sudoku);
     friend std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku);
     void SetPuzzleS(const std::string setPuzzle_s);
+    
+    bool SolvePuzzle(std::array<std::array<int, 9>, 9> puzzle);
+    bool FindEmptyTile(std::array<std::array<int, 9>, 9> puzzle);
+    bool PuzzleIsPossible(std::array<std::array<int, 9>, 9> puzzle);
+    bool NumExistsInRow(std::array<std::array<int, 9>, 9> puzzle, int row, int checkNum);
+    bool NumExistsInColumn(std::array<std::array<int, 9>, 9> puzzle, int col, int checkNum);
+    
+    
 private:
     void inline SudokuStringToArray();
 };

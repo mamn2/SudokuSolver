@@ -16,6 +16,9 @@ TEST_CASE("Output Stream") {
 
 TEST_CASE("Input Stream") {
     
+    SudokuPuzzle sudokuPuzzle;
+    std::cin >> sudokuPuzzle;
+    
 }
 
 TEST_CASE("Horizontal Check") {
