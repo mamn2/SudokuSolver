@@ -16,7 +16,7 @@ TEST_CASE("File Input") {
     SECTION("Empty File") {
         std::string fileName("/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/EmptyFile");
         SudokuPuzzle::LoadPuzzles(fileName);
-        CHECK(sudoku_games.size() == 0);
+        CHECK(GetSudokuGames().size() == 0);
     }
 
     SECTION("One game file") {
@@ -210,15 +210,12 @@ TEST_CASE("Pretty Print") {
         
         std::string originalGamesFilepath = "/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/MultipleGames";
         SudokuPuzzle::LoadPuzzles(originalGamesFilepath);
-
-        //GetSudokuGames().at(0)->SolvePuzzle();
-        
-        for (int i = 0; i < GetSudokuGames().size(); i++) {
-            GetSudokuGames().at(i)->SolvePuzzle();
-        }
+        SolveAllPuzzles();
         
         std::string solutionsFilepath = "/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/Solutions";
         PrintAllGames(solutionsFilepath);
+        
+        DeleteAllPuzzles();
 
         std::ifstream myFile;
         std::string line;

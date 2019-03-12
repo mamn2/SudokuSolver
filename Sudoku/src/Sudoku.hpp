@@ -67,12 +67,18 @@ private:
 };
 
 //Contains a list of all the sudoku games added from a file
-static std::vector<SudokuPuzzle*> sudoku_games;
+static std::vector<SudokuPuzzle*> sudokuGames;
 
 //Gets the sudoku game from the Sudoku.cpp file
 std::vector<SudokuPuzzle*>& GetSudokuGames();
 
 //Prints all the games added from a file;
 void PrintAllGames(const std::string& filepath);
+
+//Solves all puzzles in sudokuGames
+void SolveAllPuzzles();
+
+//Deletes all puzzles in sudokuGames from heap
+void DeleteAllPuzzles();
 
 #endif /* Sudoko_hpp */

@@ -10,7 +10,7 @@
 #include "Sudoku.hpp"
 
 SudokuPuzzle::SudokuPuzzle() {
-    sudoku_games.push_back(this);
+    sudokuGames.push_back(this);
 }
 
 void inline SudokuPuzzle::SudokuStringToArray() {
@@ -88,7 +88,7 @@ bool SudokuPuzzle::LoadPuzzles(std::string &filepath) {
     my_file.open(filepath);
     
     //Clear the current list of games before appending new games
-    sudoku_games.clear();
+    sudokuGames.clear();
     
     //Iterate through the list and convert into SudokuPuzzle objects.
     if (my_file.is_open())
@@ -129,7 +129,7 @@ void SudokuPuzzle::SetPuzzleS(const std::string setPuzzle_s) {
 
 //Gets the sudoku_games vector for this translation unit
 std::vector<SudokuPuzzle*>& GetSudokuGames() {
-    return sudoku_games;
+    return sudokuGames;
 }
 
 //Backtracking algorithm used to solve puzzle recursively
@@ -239,9 +239,25 @@ void PrintAllGames(const std::string& filepath) {
     std::ofstream myfile;
     myfile.open(filepath);
     
-    for (int i = 0; i < sudoku_games.size(); i++) {
-        myfile << sudoku_games.at(i)->PrettyPrint();
+    for (int i = 0; i < sudokuGames.size(); i++) {
+        myfile << sudokuGames.at(i)->PrettyPrint();
     }
     myfile.close();
+    
+}
+
+void SolveAllPuzzles() {
+    
+    for (int i = 0; i < sudokuGames.size(); i++) {
+        sudokuGames.at(i)->SolvePuzzle();
+    }
+    
+}
+
+void DeleteAllPuzzles() {
+    
+    for (int i = 0; i < sudokuGames.size(); i++) {
+        delete sudokuGames.at(i);
+    }
     
 }
