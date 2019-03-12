@@ -21,6 +21,7 @@ public:
     std::array<std::array<int, 9>, 9> puzzle_a;
     
     explicit SudokuPuzzle();
+    std::stringstream PrettyPrint() const;
     friend std::ostream& operator<<(std::ostream& outStream, const SudokuPuzzle& sudoku);
     friend std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku);
     bool LoadPuzzles(std::string& filepath) const;

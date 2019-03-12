@@ -7,6 +7,7 @@
 //
 
 #include <fstream>
+#include <sstream>
 #include "Sudoku.hpp"
 
 SudokuPuzzle::SudokuPuzzle() { }
@@ -20,44 +21,43 @@ void inline SudokuPuzzle::SudokuStringToArray() {
     }
 }
 
-std::ostream& operator<<(std::ostream& os, const SudokuPuzzle& sudoku) {
+std::stringstream SudokuPuzzle::PrettyPrint() const {
     
-    os << "NEW BOARD\n\n";
+    std::stringstream stream;
+    stream << "NEW BOARD\n\n";
     
-    for (int i = 0; i < sudoku.puzzle_a.size(); i++) {
+    for (int i = 0; i < puzzle_a.size(); i++) {
         if (i != 0 && i % 3 == 0) {
             //Adds horizontal space between 3x3 blocks
-            os << "\n";
+            stream << "\n";
         }
-        for (int j = 0; j < sudoku.puzzle_a.size(); j++) {
+        for (int j = 0; j < puzzle_a.size(); j++) {
             if (j != 0 && j % 3 == 0) {
                 //Adds vertical space between 3x3 blocks
-                os << " ";
+                stream << " ";
             }
             
-            if ((char) sudoku.puzzle_a[i][j] == '_') {
-                os << "0 ";
+            if ((char) puzzle_a[i][j] == '_') {
+                stream << "0 ";
             } else {
-                os << (char) sudoku.puzzle_a[i][j] << " ";
+                stream << (char) puzzle_a[i][j] << " ";
             }
         }
         //Resets line after three 3x3 blocks
-        os << "\n";
+        stream << "\n";
     }
-    os << "\n";
+    stream << "\n";
     
-    return os;
+    return stream;
     
 }
+    
 
-void SudokuPuzzle::SetPuzzleS(const std::string setPuzzle_s) {
-    if (setPuzzle_s.size() != 81) {
-        return;
-    }
-    puzzle_s = setPuzzle_s;
-    SudokuStringToArray();
+std::ostream& operator<<(std::ostream& os, const SudokuPuzzle& sudoku) {
+    
+    return os << sudoku.PrettyPrint().str();
+    
 }
-
 
 std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku) {
     
@@ -102,6 +102,15 @@ bool SudokuPuzzle::LoadPuzzles(std::string &filepath) const {
     }
     
 }
+
+void SudokuPuzzle::SetPuzzleS(const std::string setPuzzle_s) {
+    if (setPuzzle_s.size() != 81) {
+        return;
+    }
+    puzzle_s = setPuzzle_s;
+    SudokuStringToArray();
+}
+
 
 std::vector<SudokuPuzzle>& GetSudokuGames() {
     return sudoku_games;
