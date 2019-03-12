@@ -76,12 +76,12 @@ std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku) {
     std::string filepath;
     std::cout << "Enter a filepath to read from: " << std::endl;
     std::cin >> filepath;
-    sudoku.LoadPuzzles(filepath);
+    SudokuPuzzle::LoadPuzzles(filepath);
     return inStream;
     
 }
 
-bool SudokuPuzzle::LoadPuzzles(std::string &filepath) const {
+bool SudokuPuzzle::LoadPuzzles(std::string &filepath) {
     
     std::string line;
     std::ifstream my_file;
@@ -98,12 +98,15 @@ bool SudokuPuzzle::LoadPuzzles(std::string &filepath) const {
         while (getline(my_file,line)) {
             if (line == "") {
                 break;
-            } else if (line == "#spf1.0") {
+            } else if (i == 0 && line == "#spf1.0") {
+                i++;
                 continue;
+            } else if (i == 0 && line != "#spf1.0") {
+                //Non spf files shouldn't be read
+                return false;
             }
             SudokuPuzzle current_sudoku;
             current_sudoku.SetPuzzleS(line);
-            sudoku_games.push_back(&current_sudoku);
             i++;
         }
         my_file.close();
@@ -231,7 +234,7 @@ void SudokuPuzzle::PrintToFile(std::string filepath) const {
 
 }
 
-void PrintAllGames(const std::string filepath) {
+void PrintAllGames(const std::string& filepath) {
     
     std::ofstream myfile;
     myfile.open(filepath);

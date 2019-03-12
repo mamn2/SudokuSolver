@@ -35,6 +35,7 @@
 		7498F7FB223609B000692830 /* OneGame */ = {isa = PBXFileReference; lastKnownFileType = text; path = OneGame; sourceTree = "<group>"; };
 		7498F7FC223609C100692830 /* MultipleGames */ = {isa = PBXFileReference; lastKnownFileType = text; path = MultipleGames; sourceTree = "<group>"; };
 		7498F7FD2238398300692830 /* Solutions */ = {isa = PBXFileReference; lastKnownFileType = text; path = Solutions; sourceTree = "<group>"; };
+		7498F7FE2238532500692830 /* NonSPFFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = NonSPFFile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +75,7 @@
 				7498F7FB223609B000692830 /* OneGame */,
 				7498F7FC223609C100692830 /* MultipleGames */,
 				7498F7FD2238398300692830 /* Solutions */,
+				7498F7FE2238532500692830 /* NonSPFFile */,
 			);
 			path = Sudoku;
 			sourceTree = "<group>";

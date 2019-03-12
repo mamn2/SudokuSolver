@@ -24,7 +24,7 @@ public:
     std::string PrettyPrint() const;
     friend std::ostream& operator<<(std::ostream& outStream, const SudokuPuzzle& sudoku);
     friend std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku);
-    bool LoadPuzzles(std::string& filepath) const;
+    static bool LoadPuzzles(std::string& filepath);
     void SetPuzzleS(const std::string setPuzzle_s);
     void PrintToFile(std::string filepath) const;
     
@@ -42,6 +42,6 @@ private:
 
 static std::vector<SudokuPuzzle*> sudoku_games;
 std::vector<SudokuPuzzle*>& GetSudokuGames();
-void PrintAllGames(const std::string filepath);
+void PrintAllGames(const std::string& filepath);
 
 #endif /* Sudoko_hpp */
