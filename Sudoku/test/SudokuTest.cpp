@@ -55,7 +55,7 @@ TEST_CASE("File Input") {
 
 }
 
-TEST_CASE("Puzzle is Possible") {
+TEST_CASE("SolvePuzzle helper methods") {
     
     SudokuPuzzle sudokuPuzzle;
     sudokuPuzzle.SetPuzzleS("_7___1___6____________53______8___2__3__4716_4_____57_____1_75__6_52__4_3____9886");
@@ -94,6 +94,18 @@ TEST_CASE("Puzzle is Possible") {
             CHECK(sudokuPuzzle.NumExistsInColumn(2, '3') == false);
         }
     
+    }
+    
+    SECTION("PuzzleIsPossible() Check") {
+        
+        SECTION("Returns true if adding value is possible") {
+            CHECK(sudokuPuzzle.PuzzleIsPossible(0, 0, 5));
+        }
+        
+        SECTION("Returns false if adding value is not possible") {
+            CHECK(sudokuPuzzle.PuzzleIsPossible(0, 0, 7));
+        }
+        
     }
     
 }
@@ -191,6 +203,34 @@ TEST_CASE("Pretty Print") {
         }
         
         CHECK(line == "5 7 9  6 8 1  4 3 2 ");
+        
+    }
+    
+    SECTION("Pretty print multiple solutions to file") {
+        
+        SudokuPuzzle sudokuPuzzle;
+        std::string examplePuzzle = "_7___1___6____________53______8___2__3__4716_4_____57_____1_75__6_52__4_3____9_86";
+        sudokuPuzzle.SetPuzzleS(examplePuzzle);
+        sudokuPuzzle.SolvePuzzle();
+        
+        SudokuPuzzle sudokuPuzzle2;
+        std::string examplePuzzle2 = "____9_____3____74261__3______8_______29147__845_____7__4_____6_5__6___3_____812__";
+        sudokuPuzzle2.SetPuzzleS(examplePuzzle2);
+        sudokuPuzzle2.SolvePuzzle();
+        
+        std::string filepath = "/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/Solutions";
+        //PrintAllGames(filepath);
+
+        std::ifstream myFile;
+        std::string line;
+        myFile.open(filepath);
+        
+        //goes to line 3 to check that line
+        for (int i = 1; i <= 3; i++) {
+            getline(myFile, line);
+        }
+        
+        //CHECK(line == "5 7 9  6 8 1  4 3 2 ");
         
     }
     
