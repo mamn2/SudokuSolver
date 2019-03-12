@@ -34,6 +34,7 @@
 		7498F7F92236039300692830 /* SudokuTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SudokuTest.cpp; sourceTree = "<group>"; };
 		7498F7FB223609B000692830 /* OneGame */ = {isa = PBXFileReference; lastKnownFileType = text; path = OneGame; sourceTree = "<group>"; };
 		7498F7FC223609C100692830 /* MultipleGames */ = {isa = PBXFileReference; lastKnownFileType = text; path = MultipleGames; sourceTree = "<group>"; };
+		7498F7FD2238398300692830 /* Solutions */ = {isa = PBXFileReference; lastKnownFileType = text; path = Solutions; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +73,7 @@
 				7498F7F82235C06C00692830 /* EmptyFile */,
 				7498F7FB223609B000692830 /* OneGame */,
 				7498F7FC223609C100692830 /* MultipleGames */,
+				7498F7FD2238398300692830 /* Solutions */,
 			);
 			path = Sudoku;
 			sourceTree = "<group>";

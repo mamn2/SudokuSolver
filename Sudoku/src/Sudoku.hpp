@@ -18,20 +18,22 @@
 class SudokuPuzzle {
 public:
     std::string puzzle_s;
-    std::array<std::array<int, 9>, 9> puzzle_a;
+    std::array<std::array<char, 9>, 9> puzzle_a;
     
     explicit SudokuPuzzle();
-    std::stringstream PrettyPrint() const;
+    std::string PrettyPrint() const;
     friend std::ostream& operator<<(std::ostream& outStream, const SudokuPuzzle& sudoku);
     friend std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku);
     bool LoadPuzzles(std::string& filepath) const;
     void SetPuzzleS(const std::string setPuzzle_s);
+    void PrintToFile() const;
     
-    bool SolvePuzzle(std::array<std::array<int, 9>, 9> puzzle);
-    bool FindEmptyTile(std::array<std::array<int, 9>, 9> puzzle, int &row, int &column);
-    bool PuzzleIsPossible(std::array<std::array<int, 9>, 9> puzzle, int row, int column, int tileNum);
-    bool NumExistsInRow(std::array<std::array<int, 9>, 9> puzzle, int row, int checkNum);
-    bool NumExistsInColumn(std::array<std::array<int, 9>, 9> puzzle, int column, int checkNum);
+    bool SolvePuzzle();
+    bool FindEmptyTile(int &row, int &column) const;
+    bool PuzzleIsPossible(const int &row, const int &column, const int &tileNum) const;
+    bool NumExistsInRow(const int &row, const int &checkNum) const;
+    bool NumExistsInColumn(const int &column, const int &checkNum) const;
+    bool NumExistsInBox(const int &boxRow, const int &boxColumn, const int &tileNum) const;
     
     
 private:
