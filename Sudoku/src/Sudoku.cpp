@@ -9,7 +9,9 @@
 #include <fstream>
 #include "Sudoku.hpp"
 
-SudokuPuzzle::SudokuPuzzle() { }
+SudokuPuzzle::SudokuPuzzle() {
+    sudoku_games.push_back(this);
+}
 
 void inline SudokuPuzzle::SudokuStringToArray() {
     for (int i = 0; i < puzzle_a.size(); i++) {
@@ -55,14 +57,24 @@ std::string SudokuPuzzle::PrettyPrint() const {
 
 std::ostream& operator<<(std::ostream& os, const SudokuPuzzle& sudoku) {
     
-    return os << sudoku.PrettyPrint();
+    std::string filepath;
+    std::cout << "Enter a filepath to print to: " << std::endl;
+    std::cin >> filepath;
+    
+    std::ifstream checkfile(filepath);
+    if (checkfile.good()) {
+        sudoku.PrintToFile(filepath);
+        return os;
+    } else {
+        return os << "File does not exist\n" << sudoku.PrettyPrint();
+    }
     
 }
 
 std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku) {
     
     std::string filepath;
-    std::cout << "Enter a filepath: " << std::endl;
+    std::cout << "Enter a filepath to read from: " << std::endl;
     std::cin >> filepath;
     sudoku.LoadPuzzles(filepath);
     return inStream;
@@ -91,7 +103,7 @@ bool SudokuPuzzle::LoadPuzzles(std::string &filepath) const {
             }
             SudokuPuzzle current_sudoku;
             current_sudoku.SetPuzzleS(line);
-            sudoku_games.push_back(current_sudoku);
+            sudoku_games.push_back(&current_sudoku);
             i++;
         }
         my_file.close();
@@ -113,7 +125,7 @@ void SudokuPuzzle::SetPuzzleS(const std::string setPuzzle_s) {
 }
 
 //Gets the sudoku_games vector for this translation unit
-std::vector<SudokuPuzzle>& GetSudokuGames() {
+std::vector<SudokuPuzzle*>& GetSudokuGames() {
     return sudoku_games;
 }
 
@@ -210,16 +222,23 @@ bool SudokuPuzzle::NumExistsInBox(const int &boxRow, const int &boxColumn, const
     
 }
 
-void SudokuPuzzle::PrintToFile() const {
+void SudokuPuzzle::PrintToFile(std::string filepath) const {
     
-    std::string filepath;
-    std::cout << "Enter a filepath to print to: " << std::endl;
-    std::cin >> filepath;
     std::ofstream myfile;
-    
     myfile.open(filepath);
-    if (myfile.is_open()) {
-        myfile << PrettyPrint();
+    myfile << PrettyPrint();
+    myfile.close();
+
+}
+
+void PrintAllGames(const std::string filepath) {
+    
+    std::ofstream myfile;
+    myfile.open(filepath);
+    
+    for (int i = 0; i < sudoku_games.size(); i++) {
+        myfile << sudoku_games.at(i)->PrettyPrint();
     }
+    myfile.close();
     
 }

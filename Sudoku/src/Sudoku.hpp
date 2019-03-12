@@ -26,7 +26,7 @@ public:
     friend std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku);
     bool LoadPuzzles(std::string& filepath) const;
     void SetPuzzleS(const std::string setPuzzle_s);
-    void PrintToFile() const;
+    void PrintToFile(std::string filepath) const;
     
     bool SolvePuzzle();
     bool FindEmptyTile(int &row, int &column) const;
@@ -40,7 +40,8 @@ private:
     void inline SudokuStringToArray();
 };
 
-static std::vector<SudokuPuzzle> sudoku_games;
-std::vector<SudokuPuzzle>& GetSudokuGames();
+static std::vector<SudokuPuzzle*> sudoku_games;
+std::vector<SudokuPuzzle*>& GetSudokuGames();
+void PrintAllGames(const std::string filepath);
 
 #endif /* Sudoko_hpp */
