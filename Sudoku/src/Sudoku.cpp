@@ -105,8 +105,8 @@ bool SudokuPuzzle::LoadPuzzles(std::string &filepath) {
                 //Non spf files shouldn't be read
                 return false;
             }
-            SudokuPuzzle current_sudoku;
-            current_sudoku.SetPuzzleS(line);
+            SudokuPuzzle* current_sudoku = new SudokuPuzzle;
+            current_sudoku->SetPuzzleS(line);
             i++;
         }
         my_file.close();

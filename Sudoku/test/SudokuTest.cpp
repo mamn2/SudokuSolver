@@ -208,29 +208,29 @@ TEST_CASE("Pretty Print") {
     
     SECTION("Pretty print multiple solutions to file") {
         
-        SudokuPuzzle sudokuPuzzle;
-        std::string examplePuzzle = "_7___1___6____________53______8___2__3__4716_4_____57_____1_75__6_52__4_3____9_86";
-        sudokuPuzzle.SetPuzzleS(examplePuzzle);
-        sudokuPuzzle.SolvePuzzle();
+        std::string originalGamesFilepath = "/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/MultipleGames";
+        SudokuPuzzle::LoadPuzzles(originalGamesFilepath);
+
+        //GetSudokuGames().at(0)->SolvePuzzle();
         
-        SudokuPuzzle sudokuPuzzle2;
-        std::string examplePuzzle2 = "____9_____3____74261__3______8_______29147__845_____7__4_____6_5__6___3_____812__";
-        sudokuPuzzle2.SetPuzzleS(examplePuzzle2);
-        sudokuPuzzle2.SolvePuzzle();
+        for (int i = 0; i < GetSudokuGames().size(); i++) {
+            GetSudokuGames().at(i)->SolvePuzzle();
+        }
         
-        std::string filepath = "/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/Solutions";
-        //PrintAllGames(filepath);
+        std::string solutionsFilepath = "/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/Solutions";
+        PrintAllGames(solutionsFilepath);
 
         std::ifstream myFile;
         std::string line;
-        myFile.open(filepath);
+        myFile.open(solutionsFilepath);
         
         //goes to line 3 to check that line
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 31; i++) {
             getline(myFile, line);
         }
         
-        //CHECK(line == "5 7 9  6 8 1  4 3 2 ");
+        //Checks line 31 (The last board in the game)
+        CHECK(line == "3 4 6  9 5 7  1 2 8 ");
         
     }
     
