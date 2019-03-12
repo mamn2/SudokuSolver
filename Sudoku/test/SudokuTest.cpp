@@ -55,15 +55,46 @@ TEST_CASE("File Input") {
 
 }
 
-TEST_CASE("Vertical Check") {
+TEST_CASE("Puzzle is Possible") {
     
-}
-
-TEST_CASE("Box Check") {
+    SudokuPuzzle sudokuPuzzle;
+    sudokuPuzzle.SetPuzzleS("_7___1___6____________53______8___2__3__4716_4_____57_____1_75__6_52__4_3____9886");
     
-}
+    SECTION("Vertical Check") {
+    
+        SECTION("Returns true when num already exists") {
+            CHECK(sudokuPuzzle.NumExistsInColumn(0, '6'));
+        }
+        
+        SECTION("Returns false when num doesn't exist") {
+            CHECK(sudokuPuzzle.NumExistsInColumn(1, '2') == false);
+        }
+        
+    }
 
-TEST_CASE("Horizontal Check") {
+    SECTION("Box Check") {
+        
+        SECTION("Returns true when num already exists") {
+            CHECK(sudokuPuzzle.NumExistsInBox(0, 0, '7'));
+        }
+        
+        SECTION("Returns false when num doesn't exist") {
+            CHECK(sudokuPuzzle.NumExistsInBox(0, 0, '5') == false);
+        }
+    
+    }
+
+    SECTION("Horizontal Check") {
+        
+        SECTION("Returns true when num already exists") {
+            CHECK(sudokuPuzzle.NumExistsInColumn(1, '7'));
+        }
+        
+        SECTION("Returns false when num doesn't exist") {
+            CHECK(sudokuPuzzle.NumExistsInColumn(2, '3') == false);
+        }
+    
+    }
     
 }
 

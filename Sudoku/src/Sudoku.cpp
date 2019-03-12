@@ -161,7 +161,7 @@ bool SudokuPuzzle::SolvePuzzle() {
     
 }
 
-bool SudokuPuzzle::PuzzleIsPossible(const int &row, const int &column, const int &tileNum) const {
+bool SudokuPuzzle::PuzzleIsPossible(const int &row, const int &column, const char &tileNum) const {
     
     bool puzzleIsPossible = !NumExistsInRow(row, tileNum)
                          && !NumExistsInColumn(column, tileNum)
@@ -187,7 +187,7 @@ bool SudokuPuzzle::FindEmptyTile(int &row, int &column) const {
     
 }
 
-bool SudokuPuzzle::NumExistsInRow(const int &row, const int &checkNum) const {
+bool SudokuPuzzle::NumExistsInRow(const int &row, const char &checkNum) const {
     
     for (int column = 0; column < 9; column++) {
         if (puzzle_a[row][column] == checkNum) {
@@ -199,7 +199,7 @@ bool SudokuPuzzle::NumExistsInRow(const int &row, const int &checkNum) const {
     
 }
 
-bool SudokuPuzzle::NumExistsInColumn(const int &column, const int &checkNum) const {
+bool SudokuPuzzle::NumExistsInColumn(const int &column, const char &checkNum) const {
     
     for (int row = 0; row < 9; row++) {
         if (puzzle_a[row][column] == checkNum) {
@@ -211,11 +211,11 @@ bool SudokuPuzzle::NumExistsInColumn(const int &column, const int &checkNum) con
     
 }
 
-bool SudokuPuzzle::NumExistsInBox(const int &boxRow, const int &boxColumn, const int &tileNum) const {
+bool SudokuPuzzle::NumExistsInBox(const int &boxRow, const int &boxColumn, const char &checkNum) const {
     
     for (int row = 0; row < 3; row++) {
         for (int column = 0; column < 3; column++) {
-            if (puzzle_a[boxRow + row][boxColumn + column] == tileNum) {
+            if (puzzle_a[boxRow + row][boxColumn + column] == checkNum) {
                 return true;
             }
         }

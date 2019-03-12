@@ -49,16 +49,16 @@ public:
     bool FindEmptyTile(int &row, int &column) const;
     
     //Returns true if the current puzzle is possible (doesn't violate any rules of the game)
-    bool PuzzleIsPossible(const int &row, const int &column, const int &tileNum) const;
+    bool PuzzleIsPossible(const int &row, const int &column, const char &tileNum) const;
     
     //Returns true if the number being added already exists in the row
-    bool NumExistsInRow(const int &row, const int &checkNum) const;
+    bool NumExistsInRow(const int &row, const char &checkNum) const;
     
     //Returns true if the number being added already exists in the column
-    bool NumExistsInColumn(const int &column, const int &checkNum) const;
+    bool NumExistsInColumn(const int &column, const char &checkNum) const;
     
     //Returns true if the number being added already exists in the box
-    bool NumExistsInBox(const int &boxRow, const int &boxColumn, const int &tileNum) const;
+    bool NumExistsInBox(const int &boxRow, const int &boxColumn, const char &tileNum) const;
     
     
 private:
