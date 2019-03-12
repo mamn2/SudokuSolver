@@ -14,10 +14,10 @@ SudokuPuzzle::SudokuPuzzle() {
 }
 
 void inline SudokuPuzzle::SudokuStringToArray() {
-    for (int i = 0; i < puzzle_a.size(); i++) {
-        for (int j = 0; j < puzzle_a[i].size(); j++) {
+    for (int i = 0; i < puzzleArray.size(); i++) {
+        for (int j = 0; j < puzzleArray[i].size(); j++) {
             int stringIndex = (9 * i) + (j + 1) - 1;
-            puzzle_a[i][j] = puzzle_s.at(stringIndex);
+            puzzleArray[i][j] = puzzleString.at(stringIndex);
         }
     }
 }
@@ -27,21 +27,21 @@ std::string SudokuPuzzle::PrettyPrint() const {
     std::string prettyPuzzle;
     prettyPuzzle += "NEW BOARD\n\n";
     
-    for (int i = 0; i < puzzle_a.size(); i++) {
+    for (int i = 0; i < puzzleArray.size(); i++) {
         if (i != 0 && i % 3 == 0) {
             //Adds horizontal space between 3x3 blocks
             prettyPuzzle += "\n";
         }
-        for (int j = 0; j < puzzle_a.size(); j++) {
+        for (int j = 0; j < puzzleArray.size(); j++) {
             if (j != 0 && j % 3 == 0) {
                 //Adds vertical space between 3x3 blocks
                 prettyPuzzle += " ";
             }
             
-            if (puzzle_a[i][j] == '_') {
+            if (puzzleArray[i][j] == '_') {
                 prettyPuzzle += "0 ";
             } else {
-                prettyPuzzle += puzzle_a[i][j];
+                prettyPuzzle += puzzleArray[i][j];
                 prettyPuzzle += " ";
             }
         }
@@ -106,7 +106,7 @@ bool SudokuPuzzle::LoadPuzzles(std::string &filepath) {
                 return false;
             }
             SudokuPuzzle* current_sudoku = new SudokuPuzzle;
-            current_sudoku->SetPuzzleS(line);
+            current_sudoku->SetPuzzleString(line);
             i++;
         }
         my_file.close();
@@ -119,11 +119,11 @@ bool SudokuPuzzle::LoadPuzzles(std::string &filepath) {
     
 }
 
-void SudokuPuzzle::SetPuzzleS(const std::string setPuzzle_s) {
-    if (setPuzzle_s.size() != 81) {
+void SudokuPuzzle::SetPuzzleString(const std::string setPuzzleString) {
+    if (setPuzzleString.size() != 81) {
         return;
     }
-    puzzle_s = setPuzzle_s;
+    puzzleString = setPuzzleString;
     SudokuStringToArray();
 }
 
@@ -145,14 +145,14 @@ bool SudokuPuzzle::SolvePuzzle() {
     } else {
         for (char tileNum = '1'; tileNum <= '9'; tileNum++) {
             if (PuzzleIsPossible(currentRow, currentColumn, tileNum)) {
-                puzzle_a[currentRow][currentColumn] = tileNum;
+                puzzleArray[currentRow][currentColumn] = tileNum;
                 
                 //recursively checks if assigning tileNum solves the puzzle
                 if (SolvePuzzle()) {
                     return true;
                 } else {
                     //This is triggerred if it's not possible to solve the puzzle by making this assignment
-                    puzzle_a[currentRow][currentColumn] = '_';
+                    puzzleArray[currentRow][currentColumn] = '_';
                 }
             }
         }
@@ -166,7 +166,7 @@ bool SudokuPuzzle::PuzzleIsPossible(const int &row, const int &column, const cha
     bool puzzleIsPossible = !NumExistsInRow(row, tileNum)
                          && !NumExistsInColumn(column, tileNum)
                          && !NumExistsInBox(row - row % 3, column - column % 3, tileNum)
-                         && puzzle_a[row][column] == '_';
+                         && puzzleArray[row][column] == '_';
     
     return puzzleIsPossible;
     
@@ -177,7 +177,7 @@ bool SudokuPuzzle::FindEmptyTile(int &row, int &column) const {
     //remember that since we are passing by reference, incrementing here also changes acutal values
     for (row = 0; row < 9; row++) {
         for (column = 0; column < 9; column++) {
-            if (puzzle_a[row][column] == '_') {
+            if (puzzleArray[row][column] == '_') {
                 return true;
             }
         }
@@ -190,7 +190,7 @@ bool SudokuPuzzle::FindEmptyTile(int &row, int &column) const {
 bool SudokuPuzzle::NumExistsInRow(const int &row, const char &checkNum) const {
     
     for (int column = 0; column < 9; column++) {
-        if (puzzle_a[row][column] == checkNum) {
+        if (puzzleArray[row][column] == checkNum) {
             return true;
         }
     }
@@ -202,7 +202,7 @@ bool SudokuPuzzle::NumExistsInRow(const int &row, const char &checkNum) const {
 bool SudokuPuzzle::NumExistsInColumn(const int &column, const char &checkNum) const {
     
     for (int row = 0; row < 9; row++) {
-        if (puzzle_a[row][column] == checkNum) {
+        if (puzzleArray[row][column] == checkNum) {
             return true;
         }
     }
@@ -215,7 +215,7 @@ bool SudokuPuzzle::NumExistsInBox(const int &boxRow, const int &boxColumn, const
     
     for (int row = 0; row < 3; row++) {
         for (int column = 0; column < 3; column++) {
-            if (puzzle_a[boxRow + row][boxColumn + column] == checkNum) {
+            if (puzzleArray[boxRow + row][boxColumn + column] == checkNum) {
                 return true;
             }
         }

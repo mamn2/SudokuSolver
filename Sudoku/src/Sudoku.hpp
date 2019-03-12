@@ -17,8 +17,8 @@
 
 class SudokuPuzzle {
 public:
-    std::string puzzle_s;
-    std::array<std::array<char, 9>, 9> puzzle_a;
+    std::string puzzleString;
+    std::array<std::array<char, 9>, 9> puzzleArray;
     
     //Constructor for class, adds instance to sudoku_games vector
     explicit SudokuPuzzle();
@@ -36,8 +36,8 @@ public:
     //Returns true only if filepath is a valid spf file
     static bool LoadPuzzles(std::string& filepath);
     
-    //Setter for puzzle_s, used only for file reading purposes
-    void SetPuzzleS(const std::string setPuzzle_s);
+    //Setter for puzzleString
+    void SetPuzzleString(const std::string SetPuzzleString);
     
     //Prints current state of the board
     void PrintToFile(std::string filepath) const;
