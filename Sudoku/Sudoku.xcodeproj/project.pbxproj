@@ -27,7 +27,6 @@
 /* Begin PBXFileReference section */
 		7498F7E82231AE4F00692830 /* Sudoku */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sudoku; sourceTree = BUILT_PRODUCTS_DIR; };
 		7498F7EB2231AE4F00692830 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		7498F7F42231AF3500692830 /* catch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = catch.hpp; sourceTree = "<group>"; };
 		7498F7F52231AF5A00692830 /* Sudoku.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sudoku.cpp; sourceTree = "<group>"; };
 		7498F7F62231AF5A00692830 /* Sudoku.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sudoku.hpp; sourceTree = "<group>"; };
 		7498F7F82235C06C00692830 /* EmptyFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = EmptyFile; sourceTree = "<group>"; };
@@ -36,6 +35,7 @@
 		7498F7FC223609C100692830 /* MultipleGames */ = {isa = PBXFileReference; lastKnownFileType = text; path = MultipleGames; sourceTree = "<group>"; };
 		7498F7FD2238398300692830 /* Solutions */ = {isa = PBXFileReference; lastKnownFileType = text; path = Solutions; sourceTree = "<group>"; };
 		7498F7FE2238532500692830 /* NonSPFFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = NonSPFFile; sourceTree = "<group>"; };
+		74FB24C02238C78600CBD024 /* catch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = catch.hpp; path = "../../../cpptictactoe-mamn2/cpptictactoe/tests/catch.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 		7498F7F32231AE8C00692830 /* test */ = {
 			isa = PBXGroup;
 			children = (
-				7498F7F42231AF3500692830 /* catch.hpp */,
+				74FB24C02238C78600CBD024 /* catch.hpp */,
 				7498F7F92236039300692830 /* SudokuTest.cpp */,
 			);
 			path = test;

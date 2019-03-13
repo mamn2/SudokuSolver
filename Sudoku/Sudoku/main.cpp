@@ -10,9 +10,9 @@
 //
 //int main(int argc, const char * argv[]) {
 //    SudokuPuzzle sudokuPuzzle;
-//    
+//
 //    std::cin >> sudokuPuzzle;
-//    
+//
 //    SolveAllPuzzles();
-//    PrintAllGames("/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/Solutions");
+//    std::cout << sudokuPuzzle;
 //}

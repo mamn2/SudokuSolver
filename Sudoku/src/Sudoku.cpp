@@ -60,13 +60,16 @@ std::ostream& operator<<(std::ostream& os, const SudokuPuzzle& sudoku) {
     std::cin >> filepath;
     
     std::ifstream checkfile(filepath);
-    if (checkfile.good()) {
-        sudoku.PrintToFile(filepath);
+    if (checkfile.good() && sudokuGames.size() != 0) {
+        PrintAllGames(filepath);
         return os;
     } else {
-        return os << "File does not exist\n" << sudoku.PrettyPrint();
+        os << "File does not exist" << std::endl;
+        for (int i = 0; i < sudokuGames.size(); i++) {
+            os << sudokuGames.at(i)->PrettyPrint();
+        }
     }
-    
+    return os;
 }
 
 std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku) {
