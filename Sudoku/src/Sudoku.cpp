@@ -9,9 +9,7 @@
 #include <fstream>
 #include "Sudoku.hpp"
 
-SudokuPuzzle::SudokuPuzzle() {
-    sudokuGames.push_back(this);
-}
+SudokuPuzzle::SudokuPuzzle() { }
 
 void inline SudokuPuzzle::SudokuStringToArray() {
     for (int i = 0; i < puzzleArray.size(); i++) {
@@ -106,6 +104,7 @@ bool SudokuPuzzle::LoadPuzzles(std::string &filepath) {
                 return false;
             }
             SudokuPuzzle* current_sudoku = new SudokuPuzzle;
+            sudokuGames.push_back(current_sudoku);
             current_sudoku->SetPuzzleString(line);
             i++;
         }

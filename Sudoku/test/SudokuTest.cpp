@@ -17,18 +17,21 @@ TEST_CASE("File Input") {
         std::string fileName("/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/EmptyFile");
         SudokuPuzzle::LoadPuzzles(fileName);
         CHECK(GetSudokuGames().size() == 0);
+        DeleteAllPuzzles();
     }
 
     SECTION("One game file") {
         std::string fileName("/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/OneGame");
         SudokuPuzzle::LoadPuzzles(fileName);
         CHECK(GetSudokuGames().size() == 1);
+        DeleteAllPuzzles();
     }
 
     SECTION("Multiple games file") {
         std::string fileName("/Users/mohamedamn/Documents/sudoku-mamn2/Sudoku/Sudoku/MultipleGames");
         SudokuPuzzle::LoadPuzzles(fileName);
         CHECK(GetSudokuGames().size() == 3);
+        DeleteAllPuzzles();
     }
 
     SECTION("Non-existent file") {
@@ -58,7 +61,8 @@ TEST_CASE("File Input") {
 TEST_CASE("SolvePuzzle helper methods") {
     
     SudokuPuzzle sudokuPuzzle;
-    sudokuPuzzle.SetPuzzleString("_7___1___6____________53______8___2__3__4716_4_____57_____1_75__6_52__4_3____9886");
+    std::string puzzleString = "_7___1___6____________53______8___2__3__4716_4_____57_____1_75__6_52__4_3____9886";
+    sudokuPuzzle.SetPuzzleString(puzzleString);
     
     SECTION("Vertical Check") {
     
@@ -113,16 +117,28 @@ TEST_CASE("SolvePuzzle helper methods") {
 TEST_CASE("SolvePuzzle") {
     
     SECTION("Solving unsolvable puzzle doesn't change state") {
-        
+
         SudokuPuzzle unsolvablePuzzle;
         std::string unsolvablePuzzleS = "_7___1___6____________53______8___2__3__4716_4_____57_____1_75__6_52__4_3____9886";
         unsolvablePuzzle.SetPuzzleString(unsolvablePuzzleS);
-        
+
         SudokuPuzzle unsolvablePuzzleCopy = unsolvablePuzzle;
         unsolvablePuzzleCopy.SolvePuzzle();
+
+        bool arrayIsSame = true;
+
+        for (int i = 0; i < unsolvablePuzzle.puzzleArray.size(); i++) {
+            for (int j = 0; j < unsolvablePuzzle.puzzleArray[i].size(); j++) {
+                if (unsolvablePuzzle.puzzleArray[i][j] != unsolvablePuzzleCopy.puzzleArray[i][j]) {
+                    arrayIsSame = false;
+                }
+            }
+        }
         
+        CHECK(arrayIsSame);
+
         CHECK(unsolvablePuzzle.puzzleArray == unsolvablePuzzleCopy.puzzleArray);
-        
+
     }
     
     SECTION("Solving a puzzle changes array to solution") {

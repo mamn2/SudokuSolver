@@ -32,7 +32,7 @@ public:
     //Overloads the input operator, asks user for spf filepath
     friend std::istream& operator>>(std::istream& inStream, SudokuPuzzle& sudoku);
 
-    //Loads multiple puzzles from a filepath into SudokuPuzzle objects
+    //Loads multiple puzzles from a filepath into sudokuGames vector
     //Returns true only if filepath is a valid spf file
     static bool LoadPuzzles(std::string& filepath);
     
@@ -66,10 +66,10 @@ private:
     void inline SudokuStringToArray();
 };
 
-//Contains a list of all the sudoku games added from a file
+//Contains a list of all the sudoku games added only from a file
 static std::vector<SudokuPuzzle*> sudokuGames;
 
-//Gets the sudoku game from the Sudoku.cpp file
+//Gets sudokuGames from the Sudoku.cpp file
 std::vector<SudokuPuzzle*>& GetSudokuGames();
 
 //Prints all the games added from a file;
